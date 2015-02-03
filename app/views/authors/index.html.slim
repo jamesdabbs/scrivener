@@ -1,0 +1,16 @@
+table.table.table-striped
+  thead
+    tr
+      th Name
+      th Email
+      th Category
+  tbody
+    - @authors.each do |a|
+      tr
+        td= a.name
+        td= a.email
+        td
+          = form_for a do |f|
+            = f.select :default_category_id, @categories.map { |c| [c.name, c.id] }, {include_blank: true}, class: 'form-control'
+            / TODO: JS to make this auto-save on change
+            button.btn.btn-default.btn-xs Save

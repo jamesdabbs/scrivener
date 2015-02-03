@@ -24,6 +24,8 @@ html lang="en"
             '  Scrivener
 
         ul.nav.navbar-nav
+          li= link_to 'Journals', journals_path
+          li= link_to 'Authors', authors_path
 
         ul.nav.navbar-nav.navbar-right
           - if current_user

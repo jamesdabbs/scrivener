@@ -19,6 +19,9 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'octokit'
 
+gem 'httparty'
+gem 'sucker_punch'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'quiet_assets'

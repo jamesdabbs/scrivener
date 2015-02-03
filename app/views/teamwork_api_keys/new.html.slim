@@ -1,0 +1,8 @@
+.alert.alert-success In order to access Teamwork, you'll need to configure and store an API key. Visit #{link_to 'Teamwork', teamwork_url} and click <code>Edit my details</code> > <code>API</code> to create or retrieve one.
+
+.col-lg-6
+  = form_tag teamwork_api_key_path, class: "form" do
+    .input-group
+      = password_field_tag "teamwork_api_key", nil, placeholder: "Teamwork API key", required: true, class: "form-control"
+      span.input-group-btn
+        button.btn.btn-primary Save

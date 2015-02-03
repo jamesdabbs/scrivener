@@ -1,0 +1,25 @@
+table.table.table-striped
+  thead
+    tr
+      th Age
+      th Author
+      th Category
+      th Week
+      th Title
+      th
+  tbody
+    - @journals.each do |j|
+      tr
+        td= time_ago_in_words j.posted_at
+        td= j.author_name
+        td
+          p= j.category.try :name
+          - if j.category.try :guessed
+            small From #{j.category.from}
+        td= j.guessed_week
+        td= link_to j.title, j.remote_url
+        td
+          - if j.read?
+            = icon :sunglasses
+          - else
+            = icon :envelope
