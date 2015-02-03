@@ -22,6 +22,9 @@ form.row.well method="get"
 
   button.btn.btn-default Search
 
+= link_to sync_journals_path, method: :post, class: 'btn btn-default btn-lg' do
+  = icon :refresh
+
 table.table.table-striped
   thead
     tr
