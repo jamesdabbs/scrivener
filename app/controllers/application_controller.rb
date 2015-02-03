@@ -6,12 +6,21 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   before_filter :require_teamwork_api_key!
 
+  rescue_from Teamwork::AuthenticationError do
+    flash[:danger] = "You are not authorized properly with the Teamwork API. Please update your Teamwork API key."
+    redirect_to new_teamwork_api_key_path
+  end
+
 private
 
   def require_teamwork_api_key!
-    if current_user && current_user.teamwork_api_key.nil?
+    return unless current_user
+
+    if current_user.teamwork_api_key.nil?
       session[:post_teamwork_api_key_return] = request.path
       redirect_to new_teamwork_api_key_path
+    else
+      current_user.teamwork.authenticate!
     end
   end
 end

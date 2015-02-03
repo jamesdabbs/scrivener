@@ -2,6 +2,9 @@ module Teamwork
   TEAMWORK_URL = "https://theironyard.teamwork.com"
   JOURNALS_ID = 135182
 
+  class Error < StandardError ; end
+  class AuthenticationError < Error ; end
+
   class Client
     include HTTParty
 
@@ -10,6 +13,15 @@ module Teamwork
 
     def initialize api_key
       @auth = { username: api_key, password: "" }
+    end
+
+    def authenticate!
+      response = get "/projects/#{JOURNALS_ID}"
+      if [401, 403].include? response.code
+        raise AuthenticationError
+      elsif response.code != 200
+        raise Error
+      end
     end
 
     def all_journals
