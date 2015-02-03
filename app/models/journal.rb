@@ -33,7 +33,7 @@ class Journal < ActiveRecord::Base
   end
 
   def self.guess_weeks!
-    find_each { |j| j.update_attribute week: guessed_week }
+    find_each { |j| j.update_attributes week: j.guessed_week }
   end
 
   def remote_url

@@ -1,3 +1,27 @@
+form.row.well method="get"
+  .col-lg-4
+    strong People
+    select.form-control name="author[]" multiple=true
+      - Author.find_each do |author|
+        option value=author.id selected=params[:author].try(:include?, author.id.to_s)
+          = author.name
+
+  .col-lg-4
+    strong Categories
+    select.form-control name="category[]" multiple=true
+      - Category.find_each do |category|
+        option value=category.id selected=params[:category].try(:include?, category.id.to_s)
+          = category.name
+
+  .col-lg-4
+    strong Weeks
+    select.form-control name="week[]" multiple=true
+      - 1.upto(12).each do |n|
+        option value=n selected=params[:week].try(:include?, n)
+          = n
+
+  button.btn.btn-default Search
+
 table.table.table-striped
   thead
     tr
@@ -16,7 +40,7 @@ table.table.table-striped
           p= j.category.try :name
           - if j.category.try :guessed
             small From #{j.category.from}
-        td= j.guessed_week
+        td= j.week
         td= link_to j.title, j.remote_url
         td
           - if j.read?
