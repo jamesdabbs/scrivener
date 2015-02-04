@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     collection do
       post :sync
     end
+    member do
+      post :push_category
+    end
   end
 
   resources :teams, only: [:index]

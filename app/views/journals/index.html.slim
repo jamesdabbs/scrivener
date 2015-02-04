@@ -42,7 +42,9 @@ table.table.table-striped
         td
           p= j.category.try :name
           - if j.category.try :guessed
-            small From #{j.category.from}
+            = link_to push_category_journal_path(j), class: 'btn btn-xs btn-danger', method: :post do
+              = icon :upload
+              '  From #{j.category.from}
         td= j.week
         td= link_to j.title, j.remote_url
         td

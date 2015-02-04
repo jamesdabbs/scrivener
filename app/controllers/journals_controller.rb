@@ -10,4 +10,10 @@ class JournalsController < ApplicationController
     Journal.sync! current_user.teamwork
     redirect_to :back
   end
+
+  def push_category
+    journal = Journal.find params[:id]
+    journal.push_category_to_teamwork! current_user.teamwork
+    redirect_to :back
+  end
 end

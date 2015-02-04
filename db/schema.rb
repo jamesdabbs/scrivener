@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150203015302) do
     t.integer  "author_id"
     t.string   "author_name"
     t.integer  "category_id"
+    t.integer  "remote_category_id"
     t.integer  "week"
     t.boolean  "read"
     t.text     "data"

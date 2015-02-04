@@ -34,6 +34,16 @@ module Teamwork
       posts
     end
 
+    def update_journal_category! remote_id, journal_data, remote_category_id
+      raise unless remote_id.to_s == journal_data.fetch('id')
+      response = self.class.put "/posts/#{remote_id}.json",
+        body: { "post" => { "category-id" => remote_category_id } }.to_json,
+        basic_auth: @auth
+      unless response.code == 200
+        raise "Failed to update journal: #{response} (#{response.code})"
+      end
+    end
+
     def authors
       get("/projects/#{JOURNALS_ID}/people").fetch("people")
     end

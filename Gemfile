@@ -7,6 +7,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'slim-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
+gem 'pg'
 
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
@@ -26,12 +27,10 @@ group :development, :test do
   gem 'pry-rails'
   gem 'quiet_assets'
   gem 'spring'
-  gem 'sqlite3'
   gem 'web-console', '~> 2.0'
 end
 
 group :production do
-  gem 'pg'
   gem 'puma'
   gem 'rails_12factor'
   gem 'rollbar'
