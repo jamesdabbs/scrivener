@@ -20,5 +20,7 @@ Rails.application.routes.draw do
 
   resource :teamwork_api_key, only: [:new, :create, :edit, :update]
 
+  post 'teamwork/hook' => 'webhooks#teamwork'
+
   root to: 'static_pages#root'
 end
