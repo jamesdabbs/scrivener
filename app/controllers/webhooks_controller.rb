@@ -5,7 +5,12 @@ class WebhooksController < ApplicationController
 
   def teamwork
     if params[:token] == ENV["TEAMWORK_HOOK_SECRET"]
-      hook = Hook.create! source: request.remote_ip, payload: params.to_h
+      payload = {
+        params: params.to_h,
+        form:   params[:form],
+        raw:    request.raw_post
+      }
+      hook = Hook.create! source: request.remote_ip, payload: payload
       hook.perform!
       head :ok
     else
