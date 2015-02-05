@@ -4,7 +4,12 @@ class WebhooksController < ApplicationController
   skip_before_action :require_teamwork_api_key!
 
   def teamwork
-    if params[:token] == ENV["TEAMWORK_HOOK_SECRET"]
+    unless params[:token] == ENV["TEAMWORK_HOOK_SECRET"]
+      head :bad_request
+      return
+    end
+
+    begin
       payload = {
         params: params.to_h,
         form:   params[:form],
@@ -12,9 +17,10 @@ class WebhooksController < ApplicationController
       }
       hook = Hook.create! source: request.remote_ip, payload: payload
       hook.perform!
-      head :ok
-    else
-      head :bad_request
+    rescue => e
+      Rails.logger.info "Error in webhook: #{e}"
     end
+
+    head :ok
   end
 end
