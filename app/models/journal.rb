@@ -16,11 +16,11 @@ class Journal < ActiveRecord::Base
         first_name = data.fetch('author-first-name')
         last_name  = data.fetch('author-last-name')
 
-        j.posted_at   = DateTime.parse data.fetch 'posted-on'
-        j.title       = data.fetch 'title'
-        j.body     = data.fetch 'body'
-        j.read     = data.fetch('isRead') == '1'
-        j.data     = data
+        j.posted_at = DateTime.parse data.fetch 'posted-on'
+        j.title     = data.fetch 'title'
+        j.body      = data.fetch 'body'
+        j.read      = data.fetch('isRead') == '1'
+        j.data      = data
 
         j.author      = Author.lookup first_name, last_name
         j.author_name = if j.author.present?

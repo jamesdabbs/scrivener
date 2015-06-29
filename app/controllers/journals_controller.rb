@@ -7,7 +7,9 @@ class JournalsController < ApplicationController
   end
 
   def sync
-    Journal.sync! current_user.teamwork
+    [Author, Category, Journal].each do |klass|
+      klass.sync! current_user.teamwork
+    end
     redirect_to :back
   end
 

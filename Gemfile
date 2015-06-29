@@ -24,10 +24,10 @@ gem 'httparty'
 gem 'sucker_punch'
 
 group :development, :test do
+  gem 'better_errors'
   gem 'pry-rails'
   gem 'quiet_assets'
   gem 'spring'
-  gem 'web-console', '~> 2.0'
 end
 
 group :production do

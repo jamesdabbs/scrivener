@@ -2,7 +2,7 @@ form.row.well method="get"
   .col-lg-4
     strong People
     select.form-control name="author[]" multiple=true
-      - Author.find_each do |author|
+      - Author.order(last_name: :asc).all.each do |author|
         option value=author.id selected=params[:author].try(:include?, author.id.to_s)
           = author.name
 
